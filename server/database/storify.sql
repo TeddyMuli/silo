@@ -1,6 +1,6 @@
-CREATE DATABASE aethly;
+CREATE DATABASE storify;
 
-\c aethly;
+\c storify;
 
 -- Create Users Table
 CREATE TABLE IF NOT EXISTS Users (

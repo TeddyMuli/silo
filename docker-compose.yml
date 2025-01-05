@@ -41,10 +41,10 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 2025Muli!
-      POSTGRES_DB: aethly
+      POSTGRES_DB: storify
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./database/aethly.sql:/docker-entrypoint-initdb.d/aethly.sql
+      - ./database/storify.sql:/docker-entrypoint-initdb.d/storify.sql
     ports:
       - "5432:5432"
     networks:

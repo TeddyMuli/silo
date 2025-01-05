@@ -18,7 +18,7 @@ func SendOTPEmail(recipientEmail, otp string) error {
 		return fmt.Errorf("no API KEY")
 	}
 
-	from := mail.NewEmail("Aethly", os.Getenv("MAIL_FROM"))
+	from := mail.NewEmail("S", os.Getenv("MAIL_FROM"))
 	subject := "Your Login OTP"
 	plainTextContent := fmt.Sprintf("Your OTP is: %s. This OTP will expire in 5 minutes.", otp)
 	htmlContent := fmt.Sprintf("<p>Your OTP is: <strong>%s</strong>. This OTP will expire in 5 minutes.</p>", otp)

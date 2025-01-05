@@ -14,7 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Aethly",
+  title: "S",
   description: "Cloud Storage",
 };
 

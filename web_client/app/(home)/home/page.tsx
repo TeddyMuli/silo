@@ -17,7 +17,7 @@ const Page = () => {
         ))}
       </div>
       <div className='justify-center items-center'>
-        <p className='text-xl font-semibold'>Aethly Homepage</p>
+        <p className='text-xl font-semibold'>Storify Homepage</p>
       </div>
     </div>
   );

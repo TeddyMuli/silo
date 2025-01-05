@@ -20,7 +20,7 @@ const TopBar = () => {
         <Search className='cursor-pointer' />
         <input
           type="text"
-          placeholder='Search Aethly'
+          placeholder='Search Storify'
           className='outline-none bg-transparent w-full dark:placeholder:text-white placeholder:text-black placeholder:font-medium'
         />
       </div>

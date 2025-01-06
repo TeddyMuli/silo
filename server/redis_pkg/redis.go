@@ -15,12 +15,7 @@ var RedisClient *redis.Client
 func InitRedis() {
 	env := os.Getenv("ENV")
 
-	var redisAddress string
-	if env == "production" {
-		redisAddress = "redis://redis:6379"
-	} else {
-		redisAddress = "127.0.0.1:6379"
-	}
+	redisAddress := os.Getenv("REDIS_ADDRESS")
 
 	var options *redis.Options
 	var err error

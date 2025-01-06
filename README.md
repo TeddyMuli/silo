@@ -1,1 +1,1 @@
-# Cloud Storage Provider
+# Storify - Cloud Storage Provider

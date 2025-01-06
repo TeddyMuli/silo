@@ -17,7 +17,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Storify",
+  title: "Silo",
   description: "Cloud Storage",
 };
 

@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1>Storify</h1>
+      <h1>Silo</h1>
       <p>User: {user?.user_id}</p>
     </div>
   );

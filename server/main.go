@@ -2,11 +2,12 @@ package main
 
 import (
 	"log"
-	"server/spaces"
+	"os"
 	"server/database"
 	"server/handlers"
 	"server/redis_pkg"
 	"server/routes"
+	"server/spaces"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -15,11 +16,13 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading env variables")
+	if os.Getenv("ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatalf("Error loading env variables")
+		}	
 	}
-
+	
 	// Initialize the database connection
 	db, err := database.InitDB()
 	if err != nil {

@@ -13,7 +13,7 @@ Silo a modern solution for all your cloud storage needs.
 
 ## Installation
 ```bash
-git clone https://github.com/TeddyMuli/storify.git
+git clone https://github.com/TeddyMuli/silo.git
 ```
 
 ### Backend

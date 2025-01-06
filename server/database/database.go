@@ -15,7 +15,7 @@ func InitDB() (*pgxpool.Pool, error) {
   dbHost := os.Getenv("DB_HOST")
   dbPort := os.Getenv("DB_PORT")
 
-  connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
+  connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=require", dbUser, dbPassword, dbHost, dbPort, dbName)
 
   dbpool, err := pgxpool.Connect(context.Background(), connStr)
   if err != nil {

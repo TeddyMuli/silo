@@ -7,7 +7,6 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -19,7 +18,6 @@ const validationSchema = z.object({
 const Page = () => {
   const router = useRouter()
   const { toast } = useToast()
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const {
     register,
@@ -37,32 +35,7 @@ const Page = () => {
   });
 
   const handleLogin = async () => {
-    if (!executeRecaptcha) {
-      console.error('ReCAPTCHA not available');
-      return;
-    }
-
     try {
-      const gRecaptchaToken = await executeRecaptcha('registerVerify');
-
-      const recaptchaResponse = await axios.post('/api/recaptchaVerify', {
-        gRecaptchaToken,
-      }, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!recaptchaResponse.data.success) {
-        console.error(`ReCaptcha verification failed with score: ${recaptchaResponse.data.score}`);
-        toast({
-          description: "ReCaptcha verification failed!",
-          variant: "destructive"
-        });
-        return;
-      }
-
       const body = getValues()
       localStorage.setItem('email', body.email);
       localStorage.setItem('timeOTPSent', Date.now().toString());

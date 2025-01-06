@@ -10,7 +10,6 @@ import axios from 'axios';
 import { API_URL } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const validationSchema = z.object({
   email: z.string().email(),
@@ -29,7 +28,6 @@ const validationSchema = z.object({
 
 const Page = () => {
   const router = useRouter();
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const { toast } = useToast();
 
   const {
@@ -52,32 +50,7 @@ const Page = () => {
   });
 
   const handleRegistration = async () => {
-    if (!executeRecaptcha) {
-      console.error('ReCAPTCHA not available');
-      return;
-    }
-
     try {
-      const gRecaptchaToken = await executeRecaptcha('registerSubmit');
-
-      const recaptchaResponse = await axios.post('/api/recaptchaVerify', {
-        gRecaptchaToken,
-      }, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!recaptchaResponse.data.success) {
-        console.error(`ReCaptcha verification failed with score: ${recaptchaResponse.data.score}`);
-        toast({
-          description: "ReCaptcha verification failed!",
-          variant: "destructive"
-        });
-        return;
-      }
-
       const data = getValues()
       const { confirmPassword, ...body } = data;
       const response = await axios.post(`${API_URL}/auth/register`, body);

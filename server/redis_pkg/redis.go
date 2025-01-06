@@ -13,23 +13,15 @@ var RedisClient *redis.Client
 
 // Initializa a redis connection
 func InitRedis() {
-	env := os.Getenv("ENV")
-
 	redisAddress := os.Getenv("REDIS_ADDRESS")
 
-	var options *redis.Options
 	var err error
 
-	if env == "production" {
-		options, err = redis.ParseURL(redisAddress)
-		if err != nil {
-			fmt.Println("Error parsing Redis URL:", err)
-			os.Exit(1)
-		}
-	} else {
-		options = &redis.Options{
-			Addr: redisAddress,
-		}
+	options := &redis.Options{
+		Addr: redisAddress,
+		Username: os.Getenv("REDIS_USER"),
+		Password: os.Getenv("REDIS_PASSWORD"),
+		DB:       0,
 	}
 
 	RedisClient = redis.NewClient(options)

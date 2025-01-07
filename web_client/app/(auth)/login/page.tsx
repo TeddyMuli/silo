@@ -39,6 +39,7 @@ const Page = () => {
       const body = getValues()
       localStorage.setItem('email', body.email);
 
+      localStorage.setItem('timeOTPSent', Date.now().toString());
       
       const response = await axios.post(`${API_URL}/auth/login`, body)
       if (response.status == 200) {

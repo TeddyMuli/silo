@@ -34,15 +34,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null | undefined>(null);
   const router = useRouter();
   
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const user = parseJwt(token)
-    if (user) {
-      setUser(user)
-    } else {
-      router.push("/login")
-    }
-  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

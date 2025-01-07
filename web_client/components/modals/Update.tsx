@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from './Modal';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { handleRenameFile, handleRenameFleet, handleRenameFolder, handleUpdateDevice } from '@/mutations';
+import { handleRenameFile, handleRenameFolder } from '@/mutations';
 import { useFolderId, useOrganizationId } from '@/constants';
 
 const Update = ({ type, action, object, shown, close } : { type: string, action: string, object: any, shown: boolean, close: () => void }) => {
@@ -55,34 +55,6 @@ const Update = ({ type, action, object, shown, close } : { type: string, action:
     }
   })
 
-  const { mutate: updateFleet } = useMutation({
-    mutationKey: ['fleets'],
-    mutationFn: ({ fleet, fleetId }: { fleet: any, fleetId: string }) => handleRenameFleet(fleet, fleetId),
-    onSuccess: (data: any) => {
-      if (data.status === 200) {
-        close()
-        toast({
-          description: "Fleet Updated!"
-        })
-        queryClient.invalidateQueries({ queryKey: ['fleets'] })
-      }
-    }
-  })
-
-  const { mutate: updateDevice } = useMutation({
-    mutationKey: ['devices'],
-    mutationFn: ({ device, deviceId }: { device: any, deviceId: string }) => handleUpdateDevice(deviceId, device),
-    onSuccess: (data: any) => {
-      if (data.status === 200) {
-        close()
-        toast({
-          description: "Device Updated!"
-        })
-        queryClient.invalidateQueries({ queryKey: ['devices'] })
-      }
-    }
-  })
-
   const handleRename = () => {
     if (type === "folder") {
       const folder = {
@@ -96,19 +68,6 @@ const Update = ({ type, action, object, shown, close } : { type: string, action:
       }
 
       updateFile({ file, fileId: object?.id})
-    } else if (type === "fleet") {
-      const fleet = {
-        name: name
-      }
-
-      updateFleet({ fleet, fleetId: object?.id})
-    } else if (type === "device") {
-      const device = {
-        name: name,
-        serial_number: serial_number
-      }
-
-      updateDevice({ device, deviceId: object?.id})
     } else {
       return
     }
@@ -131,19 +90,6 @@ const Update = ({ type, action, object, shown, close } : { type: string, action:
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-
-        {type === "device" && (
-          <div className='flex flex-col'>
-            <label className='p-2 font-medium'>Serial Number</label>
-            <input
-              type="text"
-              placeholder={`Enter ${type} serial number`}
-              className='p-3 outline-none border-2 border-indigo-600 rounded-xl w-64'
-              value={serial_number}
-              onChange={(e) => setSerialNumber(e.target.value)}
-            />
-          </div>
-        )}
 
         <div className='flex gap-4 ml-auto mr-16 text-lg font-medium'>
           <button

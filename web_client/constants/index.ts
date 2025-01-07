@@ -6,6 +6,7 @@ import JSZip from 'jszip';
 import { fetchFolderHierarchyRecursively } from "@/queries";
 import axios from "axios";
 
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const useOrganizationId = () => {
   const params = useParams();

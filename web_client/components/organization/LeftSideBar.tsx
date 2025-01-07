@@ -1,6 +1,6 @@
 "use client";
 
-import { HardDrive, Heart, LayoutDashboard, MemoryStick, Plus, Trash2 } from 'lucide-react';
+import { HardDrive, Heart, LayoutDashboard, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Logo from '../shared/Logo';
@@ -17,7 +17,6 @@ const LeftSideBar = () => {
   const Links = [
     { name: "Dashboard", path: `${orgUrl}`, icon: LayoutDashboard },
     { name: "Favorites", path: `${orgUrl}/favorites`, icon: Heart },
-    { name: "Device Management", path: `${orgUrl}/devices`, icon: MemoryStick },
     { name: "Drive", path: `${orgUrl}/drive`, icon: HardDrive },
     { name: "Recycle Bin", path: `${orgUrl}/bin`, icon: Trash2 },
   ];

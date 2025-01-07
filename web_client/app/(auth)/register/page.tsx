@@ -142,10 +142,6 @@ const Page = () => {
           />
           {errors.confirmPassword && <div className="text-red-500 text-sm font-medium pt-2">{errors.confirmPassword.message}</div>}
         </div>
-        <button type='submit' disabled={!isValid} className='flex items-center justify-center gap-2 submit px-4 py-2 text-lg font-medium bg-indigo-600 rounded-lg disabled:cursor-not-allowed disabled:bg-indigo-400'>
-          {isSubmitting && <Loading />}
-          Register
-        </button>
       </form>
       <Link href="/login" className='text-sm mt-4'>Already have an account? Login</Link>
     </div>

@@ -17,16 +17,9 @@ func RegisterRoutes(app *fiber.App, db *pgxpool.Pool, redisClient *redis.Client)
 	handlers.RegisterFileRoutes(app, db)
 	// Organization routes
 	handlers.RegisterOrganizationRoutes(app, db)
-	// Device routes
-	handlers.RegisterDeviceRoutes(app, db, redisClient)
-	// Fleet routes
-	handlers.RegisterFleetRoutes(app, db)
-	// Plan routes
-	handlers.RegisterPlanRoutes(app, db)
 	// User Organization routes
 	handlers.RegisterUserOrganizationRoutes(app, db)
 	// User Device Routes
-	handlers.RegisterUserDeviceRoutes(app, db)
-	// Subscription routes
+	// Bin routes
 	handlers.RegisterBinRoutes(app, db)
 }

@@ -132,30 +132,13 @@ export const handleUpdateUser = async (email: string | undefined, user: any) => 
   }
 }
 
-export const handleCreateDevice = async (device: any) => {
+export const handleEmptyBin = async (organizationId: string) => {
   try {
-    const response = await axios.post(`${API_URL}/device/create/`, device)
-    return response
+    if (organizationId) {
+      const response = await axios.delete(`${API_URL}/bin/empty/${organizationId}`)
+      return response  
+    }
   } catch (error: any) {
     return error.response ? error.response : { data: { error: "Unknown error occurred" } }; 
   }
 }
-
-export const handleCreateFleet = async (fleet: any) => {
-  try {
-    const response = await axios.post(`${API_URL}/fleet/create/`, fleet)
-    return response
-  } catch (error: any) {
-    return error.response ? error.response : { data: { error: "Unknown error occurred" } };
-  }
-}
-
-export const handleUpdateDevice = async (deviceId: string ,device: any) => {
-  try {
-    const response = await axios.put(`${API_URL}/device/update/${deviceId}`, device)
-    return response
-  } catch (error: any) {
-    return error.response ? error.response : { data: { error: "Unknown error occurred" } };
-  }
-}
-

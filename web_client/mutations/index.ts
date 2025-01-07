@@ -159,35 +159,3 @@ export const handleUpdateDevice = async (deviceId: string ,device: any) => {
   }
 }
 
-export const handleEmptyBin = async (organizationId: string) => {
-  try {
-    if (organizationId) {
-      const response = await axios.delete(`${API_URL}/bin/empty/${organizationId}`)
-      return response  
-    }
-  } catch (error: any) {
-    return error.response ? error.response : { data: { error: "Unknown error occurred" } }; 
-  }
-}
-
-export const handleDeleteFleet = async (fleetId: string) => {
-  try {
-    if (fleetId) {
-      const response = await axios.delete(`${API_URL}/fleet/delete/${fleetId}`)
-      return response  
-    }
-  } catch (error: any) {
-    return error.response ? error.response : { data: { error: "Unknown error occurred" } }; 
-  }
-}
-
-export const handleDeleteDevice = async (deviceId: string) => {
-  try {
-    if (deviceId) {
-      const response = await axios.delete(`${API_URL}/device/delete/${deviceId}`)
-      return response  
-    }
-  } catch (error: any) {
-    return error.response ? error.response : { data: { error: "Unknown error occurred" } }; 
-  }
-}

@@ -138,3 +138,51 @@ export const getUser = async (userId: string | undefined) => {
   }
 }
 
+export const fetchFolderHierarchyRecursively = async (organizationId: string, folderId: string = 'root') => {
+  try {
+    let folders: any[] = [];
+    if (folderId === 'root') {
+      const fetchedFolders = await fetchRootFolders(organizationId);
+      folders = fetchedFolders || [];
+    } else {
+      const fetchedFolders = await fetchChildrenFolders(organizationId, folderId);
+      folders = fetchedFolders || [];
+    }
+
+    let files: any[] = [];
+    if (folderId === 'root') {
+      const fetchedFiles = await fetchRootFiles(organizationId);
+      files = fetchedFiles || [];
+    } else {
+      const fetchedFiles = await fetchChildFiles(organizationId, folderId);
+      files = fetchedFiles || [];
+    }
+
+    const folderHierarchy: any = await Promise.all(
+      folders?.map(async (folder: any) => {
+        const subfolderHierarchy = await fetchFolderHierarchyRecursively(organizationId, folder.id);
+        return {
+          ...folder,
+          files: await fetchChildFiles(organizationId, folder.id) || [],
+          children: subfolderHierarchy,
+        };
+      })
+    );
+
+    return {
+      folderId,
+      name: folderId === 'root' ? 'Drive' : (await fetchFolder(folderId)).name,
+      files: files?.map((file: any) => ({
+        name: file.name,
+        file_path: file.file_path,
+        file_size: file.file_size,
+        created_at: file.created_at,
+        updated_at: file.updated_at,
+      })),
+      subfolders: folderHierarchy,
+    };
+  } catch (error: any) {
+    console.error("Error fetching folder hierarchy: ", error);
+    return error.response ? error.response : { data: { error: "Unknown error occurred" } };
+  }
+};

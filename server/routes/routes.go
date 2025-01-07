@@ -28,6 +28,5 @@ func RegisterRoutes(app *fiber.App, db *pgxpool.Pool, redisClient *redis.Client)
 	// User Device Routes
 	handlers.RegisterUserDeviceRoutes(app, db)
 	// Subscription routes
-	handlers.RegisterSubscriptionRoutes(app, db)
 	handlers.RegisterBinRoutes(app, db)
 }
